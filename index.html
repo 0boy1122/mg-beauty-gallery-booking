@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MG Beauty Gallery | Premium Spa Booking</title>
+  <meta name="description" content="Book spa, beauty, and wellness appointments at MG Beauty Gallery with online deposits and appointment reminders.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark">MG</span>
+      <span>
+        <strong>Beauty Gallery</strong>
+        <small>Accra spa booking</small>
+      </span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#services">Treatments</a>
+      <a href="#booking">Booking</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="assets/spa-hero.png" alt="Luxury spa treatment room">
+      <div class="hero-content">
+        <div class="hero-panel">
+          <p>MG Beauty Gallery</p>
+          <h1>Beauty appointments with a luxury checkout flow.</h1>
+          <span>Online deposits, policy acceptance, WhatsApp reminders, and booking control for a serious spa business.</span>
+          <div class="hero-actions">
+            <a class="primary-link" href="#booking">Book now</a>
+            <a class="ghost-link" href="#services">View treatments</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Booking highlights">
+          <span>Next available</span>
+          <strong id="nextAvailable">Today, 10:30</strong>
+          <small>Deposit confirms the appointment after admin verification.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label="Booking benefits">
+      <div>
+        <strong>Deposit protected</strong>
+        <span>Policy accepted before payment</span>
+      </div>
+      <div>
+        <strong>WhatsApp ready</strong>
+        <span>Confirmation and reminder queue</span>
+      </div>
+      <div>
+        <strong>Admin controlled</strong>
+        <span>Approve, reschedule, cancel, export</span>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-title">
+        <p>Treatments</p>
+        <h2>Signature services</h2>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </section>
+
+    <section class="booking-shell" id="booking">
+      <div class="booking-copy">
+        <p>Booking suite</p>
+        <h2>Reserve the appointment, collect the deposit, lock the policy.</h2>
+        <div class="booking-timeline">
+          <span><strong>1</strong> Select treatment</span>
+          <span><strong>2</strong> Choose slot</span>
+          <span><strong>3</strong> Pay deposit</span>
+        </div>
+        <div class="policy-panel">
+          <strong>Cancellation policy</strong>
+          <span id="policySummary"></span>
+        </div>
+      </div>
+
+      <form class="booking-form" id="bookingForm">
+        <div class="form-card">
+          <div class="form-heading">
+            <p>Appointment</p>
+            <strong id="selectedServiceName">Select a treatment</strong>
+          </div>
+          <label>
+            Service
+            <select name="serviceId" id="serviceSelect" required></select>
+          </label>
+
+          <div class="form-row">
+            <label>
+              Date
+              <input type="date" name="date" id="dateInput" required>
+            </label>
+            <label>
+              Time
+              <select name="time" id="timeSelect" required></select>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-heading">
+            <p>Customer</p>
+            <strong>Contact details</strong>
+          </div>
+          <div class="form-row">
+            <label>
+              Full Name
+              <input name="fullName" autocomplete="name" required>
+            </label>
+            <label>
+              Phone Number
+              <input name="phone" autocomplete="tel" required>
+            </label>
+          </div>
+
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="form-card">
+            <div class="form-heading">
+              <p>Payment</p>
+              <strong>Deposit method</strong>
+            </div>
+            <div class="payment-options" role="radiogroup" aria-label="Payment method">
+              <label>
+                <input type="radio" name="paymentMethod" value="mobile_money" checked>
+                <span>Mobile Money</span>
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="card">
+                <span>Card</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="deposit-card">
+            <span>Deposit due now</span>
+            <strong id="depositAmount">GHS 0</strong>
+            <small id="depositNote"></small>
+          </div>
+        </div>
+
+        <label class="terms-box">
+          <input type="checkbox" name="acceptedTerms" required>
+          <span>I accept the cancellation policy and understand the deposit becomes non-refundable after confirmation.</span>
+        </label>
+
+        <button type="submit">Request appointment</button>
+        <p class="form-message" id="formMessage" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
