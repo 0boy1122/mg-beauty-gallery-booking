@@ -5,16 +5,115 @@ const adminState = {
   settings: null
 };
 
+const demoKey = 'mgBeautyGalleryDemoStore';
+const demoSeed = {
+  services: [
+    {
+      id: 'facial-treatment',
+      name: 'Luxury Facial Treatment',
+      description: 'Deep cleansing, exfoliation, mask, and glow finish for refreshed skin.',
+      durationMinutes: 60,
+      price: 350,
+      active: true
+    },
+    {
+      id: 'pedicure',
+      name: 'Spa Pedicure',
+      description: 'Foot soak, grooming, scrub, massage, and polish finish.',
+      durationMinutes: 50,
+      price: 180,
+      active: true
+    },
+    {
+      id: 'massage',
+      name: 'Relaxation Massage',
+      description: 'Calming full-body massage designed to ease tension and restore balance.',
+      durationMinutes: 75,
+      price: 420,
+      active: true
+    },
+    {
+      id: 'microneedling',
+      name: 'Scalp Microneedling',
+      description: 'Targeted scalp wellness session with professional aftercare guidance.',
+      durationMinutes: 45,
+      price: 500,
+      active: true
+    },
+    {
+      id: 'lash-fill',
+      name: 'All Kinds of Lashes',
+      description: 'Lash set consultation, application, shaping, and aftercare.',
+      durationMinutes: 90,
+      price: 300,
+      active: true
+    }
+  ],
+  appointments: [],
+  payments: [],
+  settings: {
+    depositPercentage: 40,
+    currency: 'GHS',
+    cancellationPolicy: 'Deposits become non-refundable after appointment confirmation. Reschedules require at least 24 hours notice.',
+    reminderHoursBefore: 24,
+    availableTimes: ['09:00', '10:30', '12:00', '13:30', '15:00', '16:30']
+  }
+};
+
 const money = value => `${adminState.settings?.currency || 'GHS'} ${Number(value || 0).toLocaleString()}`;
 
 async function api(path, options) {
-  const response = await fetch(path, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'Request failed');
+  try {
+    const response = await fetch(path, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  } catch (error) {
+    return demoApi(path, options);
+  }
+}
+
+function readDemoStore() {
+  const saved = localStorage.getItem(demoKey);
+  return saved ? JSON.parse(saved) : structuredClone(demoSeed);
+}
+
+function writeDemoStore(data) {
+  localStorage.setItem(demoKey, JSON.stringify(data));
   return data;
+}
+
+async function demoApi(path, options = {}) {
+  const method = options.method || 'GET';
+  const data = readDemoStore();
+
+  if (method === 'GET' && path === '/api/admin/appointments') return data.appointments;
+  if (method === 'GET' && path === '/api/payments') return data.payments;
+  if (method === 'GET' && path === '/api/services') return data.services;
+  if (method === 'GET' && path === '/api/settings') return data.settings;
+
+  if (method === 'PATCH' && path.startsWith('/api/appointments/')) {
+    const id = path.split('/').pop();
+    const payload = JSON.parse(options.body || '{}');
+    const appointment = data.appointments.find(item => item.id === id);
+    if (!appointment) throw new Error('Appointment not found');
+    Object.assign(appointment, payload, { updatedAt: new Date().toISOString() });
+    writeDemoStore(data);
+    return appointment;
+  }
+
+  if (method === 'POST' && path === '/api/settings') {
+    Object.assign(data.settings, JSON.parse(options.body || '{}'));
+    data.settings.depositPercentage = Number(data.settings.depositPercentage);
+    data.settings.reminderHoursBefore = Number(data.settings.reminderHoursBefore);
+    writeDemoStore(data);
+    return data.settings;
+  }
+
+  throw new Error('Demo route not available');
 }
 
 function escapeHtml(value) {

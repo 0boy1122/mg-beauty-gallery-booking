@@ -20,6 +20,10 @@ npm start
 
 Open `http://localhost:3000`.
 
+## GitHub Pages Demo
+
+The customer and admin screens can run on GitHub Pages as a static demo. Because GitHub Pages cannot run the Node API, the hosted demo stores test bookings in the browser's localStorage. Use the local Node server or a server host such as Render, Railway, or Vercel for real shared bookings, payments, and notifications.
+
 ## Production Notes
 
 The current implementation uses `data/spa-booking.json` so the system works immediately without installing a database. For production, connect the models to PostgreSQL, MySQL, or SQLite using `database/migrations/001_spa_booking_schema.sql`.
