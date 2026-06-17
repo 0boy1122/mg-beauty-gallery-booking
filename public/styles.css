@@ -40,6 +40,11 @@ textarea {
   font: inherit;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
 .site-header {
   position: sticky;
   top: 0;

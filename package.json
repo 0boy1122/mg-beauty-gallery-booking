@@ -1,7 +1,7 @@
 {
   "name": "mg-beauty-gallery-booking",
   "version": "1.0.0",
-  "description": "Spa booking and appointment management system for MG Beauty Gallery.",
+  "description": "Spa booking and appointment management system for MG Aesthetic and Spa.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -1,6 +1,6 @@
-# MG Beauty Gallery Spa Booking System
+# MG Aesthetic and Spa Booking System
 
-A modern appointment booking and admin management web app for a spa and wellness business.
+A modern appointment booking and admin management web app for MG Aesthetic and Spa.
 
 ## Features
 

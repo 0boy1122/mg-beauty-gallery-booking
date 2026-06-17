@@ -28,6 +28,10 @@ function createBooking(payload) {
       throw new Error('Selected service is not available');
     }
 
+    if (service.bookable === false || !Number.isFinite(Number(service.price))) {
+      throw new Error('This service requires direct confirmation. Please call the spa to book.');
+    }
+
     const slotTaken = data.appointments.some(appointment => {
       return appointment.date === payload.date &&
         appointment.time === payload.time &&

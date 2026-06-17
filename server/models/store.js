@@ -8,44 +8,136 @@ const initialData = {
   users: [],
   services: [
     {
-      id: 'facial-treatment',
-      name: 'Luxury Facial Treatment',
-      description: 'Deep cleansing, exfoliation, mask, and glow finish for refreshed skin.',
+      id: 'deep-tissue-massage',
+      name: 'Deep Tissue Massage',
+      description: 'Focused pressure massage for deep muscle tension and body recovery.',
       durationMinutes: 60,
-      price: 350,
-      active: true
-    },
-    {
-      id: 'pedicure',
-      name: 'Spa Pedicure',
-      description: 'Foot soak, grooming, scrub, massage, and polish finish.',
-      durationMinutes: 50,
-      price: 180,
-      active: true
-    },
-    {
-      id: 'massage',
-      name: 'Relaxation Massage',
-      description: 'Calming full-body massage designed to ease tension and restore balance.',
-      durationMinutes: 75,
-      price: 420,
-      active: true
-    },
-    {
-      id: 'microneedling',
-      name: 'Scalp Microneedling',
-      description: 'Targeted scalp wellness session with professional aftercare guidance.',
-      durationMinutes: 45,
       price: 500,
       active: true
     },
     {
-      id: 'lash-fill',
-      name: 'All Kinds of Lashes',
-      description: 'Lash set consultation, application, shaping, and aftercare.',
-      durationMinutes: 90,
+      id: 'swedish-massage',
+      name: 'Swedish Massage',
+      description: 'Classic full-body massage for circulation, relaxation, and stress relief.',
+      durationMinutes: 60,
+      price: 400,
+      active: true
+    },
+    {
+      id: 'aromatherapy-massage',
+      name: 'Aromatherapy Massage',
+      description: 'Massage therapy paired with calming aromatic oils for a soothing experience.',
+      durationMinutes: 60,
+      price: 450,
+      active: true
+    },
+    {
+      id: 'prostate-massage',
+      name: 'Prostate Massage',
+      description: 'Specialized massage service handled with privacy and professional care.',
+      durationMinutes: 60,
+      price: 650,
+      active: true
+    },
+    {
+      id: 'relaxation-massage',
+      name: 'Relaxation Massage',
+      description: 'Gentle massage designed to calm the body, ease stress, and restore balance.',
+      durationMinutes: 60,
+      price: 400,
+      active: true
+    },
+    {
+      id: 'back-pain-relief-massage',
+      name: 'Back Pain Relief Massage',
+      description: 'Targeted back therapy for stiffness, soreness, and everyday body pain.',
+      durationMinutes: 60,
+      price: 650,
+      active: true
+    },
+    {
+      id: 'erotic-massage',
+      name: 'Erotic Massage',
+      description: 'Private specialty massage appointment with discreet booking handling.',
+      durationMinutes: 60,
+      price: 700,
+      active: true
+    },
+    {
+      id: 'nuru-massage',
+      name: 'Nuru Massage',
+      description: 'Premium specialty massage session with elevated privacy and preparation.',
+      durationMinutes: 75,
+      price: 1000,
+      active: true
+    },
+    {
+      id: 'body-scrubbing',
+      name: 'Body Scrubbing',
+      description: 'Full body exfoliation treatment for smoother, refreshed skin.',
+      durationMinutes: 45,
+      price: 450,
+      active: true
+    },
+    {
+      id: 'facials-acne-treatment',
+      name: 'Facials and Acne Treatment',
+      description: 'Facial care focused on acne treatment, cleansing, and skin renewal.',
+      durationMinutes: 60,
+      price: 400,
+      active: true
+    },
+    {
+      id: 'razor-bumps-treatment',
+      name: 'Razor Bumps Treatment',
+      description: 'Targeted treatment for razor bumps and irritated skin.',
+      durationMinutes: 45,
       price: 300,
       active: true
+    },
+    {
+      id: 'teeth-whitening',
+      name: 'Teeth Whitening',
+      description: 'Single-session teeth whitening treatment.',
+      durationMinutes: 30,
+      price: 100,
+      active: true
+    },
+    {
+      id: 'hot-stone-massage',
+      name: 'Hot Stone Massage',
+      description: 'Heated stone massage therapy. Call the spa to confirm pricing and availability.',
+      durationMinutes: 60,
+      price: null,
+      active: true,
+      bookable: false
+    },
+    {
+      id: 'skin-tag-removal',
+      name: 'Skin Tag Removal',
+      description: 'Aesthetic skin tag removal consultation. Call the spa to confirm pricing.',
+      durationMinutes: 45,
+      price: null,
+      active: true,
+      bookable: false
+    },
+    {
+      id: 'microshading',
+      name: 'Microshading',
+      description: 'Brow enhancement service. Call the spa to confirm pricing.',
+      durationMinutes: 90,
+      price: null,
+      active: true,
+      bookable: false
+    },
+    {
+      id: 'pedicure',
+      name: 'Pedicure',
+      description: 'Nail and foot care service. Call the spa to confirm pricing.',
+      durationMinutes: 50,
+      price: null,
+      active: true,
+      bookable: false
     }
   ],
   appointments: [],
@@ -55,8 +147,8 @@ const initialData = {
   settings: {
     depositPercentage: 40,
     currency: 'GHS',
-    businessName: 'MG Beauty Gallery',
-    businessPhone: '020 965 0192',
+    businessName: 'MG Aesthetic and Spa',
+    businessPhone: '0541 411 570 / 0209 650 192',
     cancellationPolicy: 'Deposits become non-refundable after appointment confirmation. Reschedules require at least 24 hours notice.',
     reminderHoursBefore: 24,
     availableTimes: ['09:00', '10:30', '12:00', '13:30', '15:00', '16:30']

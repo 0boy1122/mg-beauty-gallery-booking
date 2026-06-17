@@ -141,5 +141,5 @@ const server = http.createServer((req, res) => {
 
 store.ensureDataFile();
 server.listen(PORT, () => {
-  console.log(`MG Beauty Gallery booking app running at http://localhost:${PORT}`);
+  console.log(`MG Aesthetic and Spa booking app running at http://localhost:${PORT}`);
 });
