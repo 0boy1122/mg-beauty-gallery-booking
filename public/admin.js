@@ -218,6 +218,15 @@ function escapeHtml(value) {
   }[char]));
 }
 
+function serviceImage(service) {
+  if (service.id.includes('teeth')) return 'assets/service-teeth.png';
+  if (service.id.includes('body') || service.id.includes('skin') || service.id.includes('razor') || service.id.includes('micro') || service.id.includes('pedicure')) {
+    return 'assets/service-body-scrub.png';
+  }
+  if (service.id.includes('facial') || service.id.includes('acne')) return 'assets/service-facial.png';
+  return 'assets/service-massage.png';
+}
+
 function renderStats() {
   document.querySelector('#totalBookings').textContent = adminState.appointments.length;
   document.querySelector('#confirmedBookings').textContent = adminState.appointments.filter(item => item.status === 'confirmed').length;
@@ -275,9 +284,12 @@ function renderServices() {
   const list = document.querySelector('#serviceList');
   list.innerHTML = adminState.services.map(service => `
     <div class="service-row">
-      <div>
-        <strong>${escapeHtml(service.name)}</strong>
-        <small>${escapeHtml(service.durationMinutes)} min / ${escapeHtml(service.bookable === false ? 'call to book' : 'online booking')}</small>
+      <div class="service-row-main">
+        <img src="${serviceImage(service)}" alt="">
+        <div>
+          <strong>${escapeHtml(service.name)}</strong>
+          <small>${escapeHtml(service.durationMinutes)} min / ${escapeHtml(service.bookable === false ? 'call to book' : 'online booking')}</small>
+        </div>
       </div>
       <span>${Number.isFinite(Number(service.price)) ? money(service.price) : 'Call to book'}</span>
     </div>
