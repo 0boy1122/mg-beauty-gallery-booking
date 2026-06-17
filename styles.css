@@ -254,6 +254,52 @@ button {
   color: var(--muted);
 }
 
+.visual-showcase {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(320px, 1.45fr);
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+  padding: clamp(44px, 7vw, 88px) clamp(18px, 4vw, 58px);
+  background: #fff;
+}
+
+.showcase-copy {
+  max-width: 460px;
+}
+
+.showcase-copy p {
+  color: var(--rose-dark);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.showcase-copy h2 {
+  margin-top: 10px;
+}
+
+.image-band {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: repeat(2, minmax(170px, 1fr));
+  gap: 12px;
+  min-height: 430px;
+}
+
+.image-band img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 18px 44px rgba(32, 25, 27, 0.12);
+}
+
+.image-band img:first-child {
+  grid-row: span 2;
+}
+
 .section,
 .booking-shell {
   padding: clamp(44px, 7vw, 94px) clamp(18px, 4vw, 58px);
@@ -297,10 +343,29 @@ h2 {
 .service-card {
   display: grid;
   align-content: space-between;
-  min-height: 260px;
-  padding: 22px;
+  overflow: hidden;
+  min-height: 390px;
   animation: liftIn 520ms ease both;
   animation-delay: var(--delay, 0ms);
+}
+
+.service-card > img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.service-card > :not(img) {
+  margin-left: 22px;
+  margin-right: 22px;
+}
+
+.service-card .service-topline {
+  margin-top: 18px;
+}
+
+.service-card button {
+  margin-bottom: 22px;
 }
 
 @keyframes liftIn {
@@ -723,6 +788,21 @@ td small {
   border-radius: 8px;
 }
 
+.service-row-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 12px;
+}
+
+.service-row-main img {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .feed-item span {
   padding: 5px 8px;
   color: #184a35;
@@ -756,6 +836,7 @@ td small {
   }
 
   .hero-content,
+  .visual-showcase,
   .booking-shell,
   .form-row,
   .checkout-grid,
@@ -765,6 +846,17 @@ td small {
   .two-col,
   .proof-strip {
     grid-template-columns: 1fr;
+  }
+
+  .image-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+  }
+
+  .image-band img,
+  .image-band img:first-child {
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
   }
 
   .booking-copy {
@@ -794,9 +886,14 @@ td small {
   }
 
   .hero-actions,
+  .image-band,
   .payment-options,
   .table-actions {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .image-band {
     grid-template-columns: 1fr;
   }
 

@@ -258,6 +258,15 @@ function selectedService() {
   return state.services.find(service => service.id === document.querySelector('#serviceSelect').value);
 }
 
+function serviceImage(service) {
+  if (service.id.includes('teeth')) return 'assets/service-teeth.png';
+  if (service.id.includes('body') || service.id.includes('skin') || service.id.includes('razor') || service.id.includes('micro') || service.id.includes('pedicure')) {
+    return 'assets/service-body-scrub.png';
+  }
+  if (service.id.includes('facial') || service.id.includes('acne')) return 'assets/service-facial.png';
+  return 'assets/service-massage.png';
+}
+
 function renderServices() {
   const grid = document.querySelector('#serviceGrid');
   const serviceSelect = document.querySelector('#serviceSelect');
@@ -265,6 +274,7 @@ function renderServices() {
   grid.innerHTML = activeServices()
     .map((service, index) => `
       <article class="service-card" style="--delay:${index * 60}ms">
+        <img src="${serviceImage(service)}" alt="${escapeHtml(service.name)} preview">
         <div class="service-topline">
           <span>${service.durationMinutes} min</span>
           <strong>${Number.isFinite(Number(service.price)) ? currency(service.price) : 'Call to book'}</strong>
