@@ -219,12 +219,14 @@ function escapeHtml(value) {
 }
 
 function serviceImage(service) {
-  if (service.id.includes('teeth')) return 'assets/service-teeth.png';
-  if (service.id.includes('body') || service.id.includes('skin') || service.id.includes('razor') || service.id.includes('micro') || service.id.includes('pedicure')) {
-    return 'assets/service-body-scrub.png';
+  if (service.id.includes('teeth')) return 'assets/service-teeth.jpg';
+  if (service.id.includes('hot-stone')) return 'assets/service-hot-stone.jpg';
+  if (service.id.includes('body')) return 'assets/service-body-scrub.jpg';
+  if (service.id.includes('facial') || service.id.includes('acne')) return 'assets/service-facial.jpg';
+  if (service.id.includes('skin') || service.id.includes('razor') || service.id.includes('micro') || service.id.includes('pedicure')) {
+    return 'assets/service-skin-treatment.jpg';
   }
-  if (service.id.includes('facial') || service.id.includes('acne')) return 'assets/service-facial.png';
-  return 'assets/service-massage.png';
+  return 'assets/service-massage.jpg';
 }
 
 function renderStats() {
