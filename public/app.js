@@ -128,7 +128,7 @@ const demoKey = 'mgAestheticSpaDemoStore'; const demoSeed = {   services: [
     'back-pain-relief-massage': 'https://images.pexels.com/photos/7795827/pexels-photo-7795827.jpeg?auto=compress&cs=tinysrgb&w=900&h=650&fit=crop',
     'erotic-massage': 'https://images.pexels.com/photos/6560283/pexels-photo-6560283.jpeg?auto=compress&cs=tinysrgb&w=900&h=650&fit=crop',
     'nuru-massage': 'https://images.pexels.com/photos/28321609/pexels-photo-28321609.jpeg?auto=compress&cs=tinysrgb&w=900&h=650&fit=crop',
-    'body-scrubbing': 'https://images.pexels.com/photos/6621456/pexels-photo-6621456.jpeg?auto=compress&cs=tinysrgb&w=900&h=650&fit=crop',
+    'body-scrubbing': 'assets/ai-body-scrub.jpg',
     'facials-acne-treatment': 'assets/ai-facial-acne.jpg',
     'razor-bumps-treatment': 'assets/ai-razor-bumps.jpg',
     'teeth-whitening': 'assets/ai-teeth-whitening.jpg',
