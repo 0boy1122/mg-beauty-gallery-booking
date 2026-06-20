@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --check server.js && node --check server/controllers/bookingController.js && node --check server/models/store.js"
+    "test": "node --check server.js && node --check server/controllers/bookingController.js && node --check server/models/store.js && node --check server/services/emailService.js && node --check server/services/notificationService.js"
   },
   "keywords": [
     "spa",

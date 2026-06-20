@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { URL } = require('url');
 const bookingController = require('./server/controllers/bookingController');
+const notificationService = require('./server/services/notificationService');
 const store = require('./server/models/store');
 
 const PORT = process.env.PORT || 3000;
@@ -91,16 +92,28 @@ async function routeApi(req, res, url) {
       return sendJson(res, 200, store.getPayments());
     }
 
+    if (req.method === 'GET' && url.pathname === '/api/notifications') {
+      return sendJson(res, 200, store.readData().notifications);
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/bookings') {
       const payload = await readBody(req);
       const result = bookingController.createBooking(payload);
-      return sendJson(res, 201, result);
+      const notifications = await notificationService.sendBookingCreated(result.appointment.id);
+      return sendJson(res, 201, { ...result, notifications });
     }
 
     if (req.method === 'PATCH' && url.pathname.startsWith('/api/appointments/')) {
       const id = url.pathname.split('/').pop();
       const payload = await readBody(req);
-      return sendJson(res, 200, bookingController.updateAppointment(id, payload));
+      const appointment = bookingController.updateAppointment(id, payload);
+      const notification = await notificationService.sendAppointmentUpdate(id);
+      return sendJson(res, 200, { appointment, notification });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/notifications/reminders') {
+      const notifications = await notificationService.processDueReminders();
+      return sendJson(res, 200, { processed: notifications.length, notifications });
     }
 
     if (req.method === 'POST' && url.pathname === '/api/settings') {
@@ -140,6 +153,17 @@ const server = http.createServer((req, res) => {
 });
 
 store.ensureDataFile();
+notificationService.processDueReminders().catch(error => {
+  console.error('Initial reminder check failed:', error.message);
+});
+
+const reminderTimer = setInterval(() => {
+  notificationService.processDueReminders().catch(error => {
+    console.error('Reminder check failed:', error.message);
+  });
+}, 15 * 60 * 1000);
+reminderTimer.unref();
+
 server.listen(PORT, () => {
   console.log(`MG Aesthetic and Spa booking app running at http://localhost:${PORT}`);
 });
