@@ -1,16 +1,19 @@
 :root {
-  --ink: #21191b;
-  --muted: #71676a;
-  --rose: #bd456d;
-  --rose-dark: #7e2548;
-  --gold: #b58a4d;
-  --green: #386654;
-  --sage: #dbe6dd;
-  --paper: #fbf7f4;
-  --cream: #fffdf9;
+  --ink: #06142f;
+  --muted: #60708a;
+  --rose: #0b91ff;
+  --rose-dark: #0057c8;
+  --gold: #1bd760;
+  --green: #16b958;
+  --sage: #e7f8ef;
+  --paper: #f3f7fb;
+  --cream: #ffffff;
   --panel: #ffffff;
-  --line: #eadfd8;
-  --shadow: 0 24px 70px rgba(32, 25, 27, 0.14);
+  --line: #d9e7f4;
+  --navy: #020914;
+  --navy-soft: #061a40;
+  --blue: #0b91ff;
+  --shadow: 0 24px 70px rgba(2, 9, 20, 0.16);
 }
 
 * {
@@ -24,7 +27,9 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, rgba(7, 35, 82, 0.08), transparent 360px),
+    var(--paper);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -54,8 +59,8 @@ button:disabled {
   justify-content: space-between;
   gap: 20px;
   padding: 14px clamp(18px, 4vw, 58px);
-  background: rgba(251, 247, 244, 0.88);
-  border-bottom: 1px solid rgba(234, 223, 216, 0.85);
+  background: rgba(2, 9, 20, 0.9);
+  border-bottom: 1px solid rgba(11, 145, 255, 0.22);
   backdrop-filter: blur(18px);
 }
 
@@ -68,21 +73,30 @@ button:disabled {
 
 .brand-mark {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   place-items: center;
-  flex: 0 0 44px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--rose-dark), var(--green));
-  border-radius: 8px;
-  font-weight: 900;
-  box-shadow: 0 12px 26px rgba(126, 37, 72, 0.22);
+  flex: 0 0 52px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(11, 145, 255, 0.3), 0 16px 32px rgba(0, 87, 200, 0.24);
+  object-fit: cover;
+}
+
+.brand-logo {
+  display: block;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
 }
 
 .brand strong,
 .brand small {
   display: block;
   line-height: 1.1;
+}
+
+.brand strong {
+  color: #f7fbff;
 }
 
 .brand small,
@@ -98,13 +112,25 @@ button:disabled {
   letter-spacing: 0.08em;
 }
 
+.brand small {
+  color: rgba(214, 233, 255, 0.78);
+}
+
 nav {
   display: flex;
   align-items: center;
   gap: 18px;
-  color: var(--muted);
+  color: rgba(247, 251, 255, 0.78);
   font-size: 0.95rem;
   font-weight: 800;
+}
+
+nav a {
+  transition: color 160ms ease;
+}
+
+nav a:hover {
+  color: #23dc6c;
 }
 
 .hero {
@@ -113,7 +139,7 @@ nav {
   display: grid;
   align-items: end;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--navy);
 }
 
 .hero img {
@@ -130,8 +156,9 @@ nav {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(32, 25, 27, 0.82), rgba(32, 25, 27, 0.36) 54%, rgba(251, 247, 244, 0.08)),
-    linear-gradient(0deg, rgba(32, 25, 27, 0.55), transparent 42%);
+    radial-gradient(circle at 74% 18%, rgba(11, 145, 255, 0.34), transparent 26%),
+    linear-gradient(90deg, rgba(2, 9, 20, 0.9), rgba(6, 20, 47, 0.58) 54%, rgba(22, 185, 88, 0.1)),
+    linear-gradient(0deg, rgba(2, 9, 20, 0.72), transparent 42%);
 }
 
 .hero-content {
@@ -160,7 +187,7 @@ nav {
 
 .hero-panel p {
   margin: 0;
-  color: #f4c6d7;
+  color: #23dc6c;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -183,8 +210,8 @@ nav {
 .hero-card {
   padding: 22px;
   color: #fff;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(2, 9, 20, 0.62);
+  border: 1px solid rgba(11, 145, 255, 0.38);
   border-radius: 8px;
   backdrop-filter: blur(18px);
 }
@@ -211,12 +238,12 @@ button {
   min-height: 48px;
   padding: 0 20px;
   color: #fff;
-  background: var(--rose-dark);
+  background: linear-gradient(135deg, var(--blue), var(--green));
   border: 0;
   border-radius: 8px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 14px 30px rgba(126, 37, 72, 0.23);
+  box-shadow: 0 14px 30px rgba(0, 87, 200, 0.24);
 }
 
 .primary-link {
@@ -226,8 +253,8 @@ button {
 .ghost-link {
   margin-top: 26px;
   color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(2, 9, 20, 0.34);
+  border: 1px solid rgba(11, 145, 255, 0.48);
   box-shadow: none;
 }
 
@@ -235,13 +262,13 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  background: var(--line);
+  background: #b8d8f2;
   border-bottom: 1px solid var(--line);
 }
 
 .proof-strip div {
   padding: 22px clamp(18px, 4vw, 54px);
-  background: #fff;
+  background: #ffffff;
 }
 
 .proof-strip strong,
@@ -268,7 +295,7 @@ button {
 }
 
 .showcase-copy p {
-  color: var(--rose-dark);
+  color: var(--green);
   font-size: 0.76rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -277,6 +304,77 @@ button {
 
 .showcase-copy h2 {
   margin-top: 10px;
+}
+
+.location-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(320px, 1.18fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  padding: clamp(44px, 7vw, 88px) clamp(18px, 4vw, 58px);
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.location-copy {
+  max-width: 520px;
+}
+
+.location-copy p {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.location-copy > span,
+.location-copy > small {
+  display: block;
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.location-actions .primary-link {
+  margin-top: 0;
+}
+
+.location-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  color: var(--ink);
+  background: var(--sage);
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.map-frame {
+  min-height: 380px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
 }
 
 .image-band {
@@ -381,7 +479,7 @@ h2 {
 
 .service-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(189, 69, 109, 0.38);
+  border-color: rgba(11, 145, 255, 0.38);
   box-shadow: var(--shadow);
   transition: 180ms ease;
 }
@@ -418,7 +516,7 @@ td small {
 .service-card button {
   min-height: 42px;
   margin-top: 20px;
-  background: var(--ink);
+  background: var(--navy-soft);
   box-shadow: none;
 }
 
@@ -459,7 +557,7 @@ td small {
   height: 30px;
   place-items: center;
   color: #fff;
-  background: var(--green);
+  background: linear-gradient(135deg, var(--blue), var(--green));
   border-radius: 50%;
 }
 
@@ -521,6 +619,57 @@ label {
   font-weight: 850;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+.visit-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.visit-options legend {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.visit-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 12px;
+  color: var(--ink);
+  background: #f4f9ff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.visit-options input {
+  width: auto;
+  min-height: auto;
+  accent-color: var(--green);
+}
+
+.visit-options strong,
+.visit-options small {
+  display: block;
+}
+
+.visit-options small,
+#homeAddressField small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
 input,
 select,
 textarea {
@@ -540,8 +689,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 3px solid rgba(189, 69, 109, 0.18);
-  border-color: var(--rose);
+  outline: 3px solid rgba(11, 145, 255, 0.18);
+  border-color: var(--blue);
 }
 
 .payment-options {
@@ -567,15 +716,55 @@ textarea:focus {
   min-height: auto;
 }
 
+.payment-proof-card {
+  gap: 16px;
+}
+
+.momo-box {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  background: linear-gradient(180deg, #f3f9ff, #effbf4);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.momo-box span,
+.momo-box small,
+.screenshot-upload small {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.momo-box strong {
+  color: var(--green);
+  font-size: 1.35rem;
+}
+
+.screenshot-upload input {
+  padding: 12px;
+  background: #fff;
+}
+
+.proof-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--rose-dark);
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .deposit-card {
   display: grid;
   align-content: center;
   gap: 4px;
   padding: 20px;
   color: #fff;
-  background: linear-gradient(135deg, var(--rose-dark), var(--green));
+  background:
+    radial-gradient(circle at top right, rgba(35, 220, 108, 0.45), transparent 42%),
+    linear-gradient(135deg, var(--navy-soft), var(--rose-dark) 52%, var(--green));
   border-radius: 8px;
-  box-shadow: 0 18px 42px rgba(56, 102, 84, 0.18);
+  box-shadow: 0 18px 42px rgba(0, 87, 200, 0.2);
 }
 
 .deposit-card span,
@@ -617,8 +806,9 @@ textarea:focus {
   padding: 22px;
   color: #fff;
   background:
-    linear-gradient(180deg, rgba(126, 37, 72, 0.24), transparent),
-    var(--ink);
+    radial-gradient(circle at 24% 0%, rgba(11, 145, 255, 0.28), transparent 28%),
+    linear-gradient(180deg, rgba(22, 185, 88, 0.14), transparent),
+    var(--navy);
 }
 
 .admin-sidebar nav {
@@ -783,7 +973,7 @@ td small {
   justify-content: space-between;
   gap: 14px;
   padding: 14px;
-  background: #fbf7f4;
+  background: #f7fbff;
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -805,7 +995,7 @@ td small {
 
 .feed-item span {
   padding: 5px 8px;
-  color: #184a35;
+  color: #063e20;
   background: var(--sage);
   border-radius: 999px;
   font-size: 0.75rem;
@@ -837,6 +1027,7 @@ td small {
 
   .hero-content,
   .visual-showcase,
+  .location-section,
   .booking-shell,
   .form-row,
   .checkout-grid,
@@ -863,6 +1054,11 @@ td small {
     position: static;
   }
 
+  .map-frame,
+  .map-frame iframe {
+    min-height: 320px;
+  }
+
   .admin-sidebar {
     position: static;
     height: auto;
@@ -886,8 +1082,10 @@ td small {
   }
 
   .hero-actions,
+  .location-actions,
   .image-band,
   .payment-options,
+  .visit-options,
   .table-actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -899,6 +1097,7 @@ td small {
 
   .primary-link,
   .ghost-link,
+  .location-call,
   button {
     width: 100%;
   }
