@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Pure Touch Massage GH logo</title>
+  <desc id="desc">Circular navy logo with blue wave, green touch line, and Pure Touch Massage GH text.</desc>
+  <defs>
+    <radialGradient id="bg" cx="62%" cy="17%" r="78%">
+      <stop offset="0" stop-color="#0b7cff"/>
+      <stop offset="0.22" stop-color="#052b78"/>
+      <stop offset="0.68" stop-color="#041637"/>
+      <stop offset="1" stop-color="#020914"/>
+    </radialGradient>
+    <linearGradient id="wave" x1="80" x2="430" y1="395" y2="462">
+      <stop offset="0" stop-color="#043a95"/>
+      <stop offset="0.48" stop-color="#0094ff"/>
+      <stop offset="1" stop-color="#02265e"/>
+    </linearGradient>
+    <linearGradient id="touch" x1="118" x2="414" y1="263" y2="263">
+      <stop offset="0" stop-color="#08a8ff"/>
+      <stop offset="0.52" stop-color="#10d86d"/>
+      <stop offset="1" stop-color="#20ef54"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="248" fill="url(#bg)"/>
+  <path fill="url(#wave)" opacity="0.72" d="M44 431c68-42 135-32 205-16 83 18 137-11 219-58-42 75-112 123-207 132-86 8-158-16-217-58Z"/>
+  <path fill="none" stroke="#0b7cff" stroke-linecap="round" stroke-width="5" opacity="0.72" d="M84 410c72-39 126-34 192-14 63 20 118 9 164-35"/>
+  <path fill="none" stroke="#f6f8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M183 175c16-33 44-55 77-55 27 0 47 13 57 36m-95-6c-9 30-24 55-44 75m44-75c23 25 57 38 103 39m-147 36c-27 11-52 27-75 49m222-85c23-12 51-10 71 7 16 13 25 31 25 51m-199-98c-12-11-14-28-4-41 10-14 31-17 46-8m-13-31c15-4 29 2 36 14m-74 154c54 6 102 0 144-22"/>
+  <path fill="none" stroke="url(#touch)" stroke-linecap="round" stroke-linejoin="round" stroke-width="9" d="M101 289c49-29 106-42 171-38 43 3 82 13 117 30 11 5 22 5 34 0"/>
+  <text x="256" y="347" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" letter-spacing="5">
+    <tspan fill="#0a9cff">PURE</tspan><tspan fill="#25d447"> TOUCH</tspan>
+  </text>
+  <text x="256" y="388" text-anchor="middle" fill="#f6f8ff" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="11">MASSAGE GH</text>
+  <path fill="none" stroke="#0b7cff" stroke-width="3" d="M94 374h78"/>
+  <path fill="none" stroke="#21d355" stroke-width="3" d="M340 374h78"/>
+  <text x="256" y="424" text-anchor="middle" fill="#d6e9ff" opacity="0.8" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="8">FOR YOUR BODY AND SOUL</text>
+</svg>

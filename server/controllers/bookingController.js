@@ -17,6 +17,26 @@ function requiredEmail(value) {
   }
 }
 
+function paymentScreenshot(payload) {
+  const screenshot = payload.paymentScreenshot || {};
+  required(screenshot.dataUrl, 'Payment screenshot');
+
+  if (screenshot.type && !String(screenshot.type).startsWith('image/')) {
+    throw new Error('Payment screenshot must be an image');
+  }
+
+  if (Number(screenshot.size || 0) > 2_500_000) {
+    throw new Error('Payment screenshot must be below 2.5MB');
+  }
+
+  return {
+    name: screenshot.name || 'payment-screenshot',
+    type: screenshot.type || 'image',
+    size: Number(screenshot.size || 0),
+    dataUrl: screenshot.dataUrl
+  };
+}
+
 function createBooking(payload) {
   return store.update(data => {
     required(payload.serviceId, 'Service');
@@ -26,9 +46,16 @@ function createBooking(payload) {
     required(payload.phone, 'Phone number');
     requiredEmail(payload.email);
 
+    const serviceLocation = payload.serviceLocation === 'home' ? 'home' : 'spa';
+    if (serviceLocation === 'home') {
+      required(payload.homeAddress, 'Home service address');
+    }
+
     if (!payload.acceptedTerms) {
       throw new Error('Terms and cancellation policy must be accepted before payment');
     }
+
+    const screenshot = paymentScreenshot(payload);
 
     const service = data.services.find(item => item.id === payload.serviceId && item.active);
     if (!service) {
@@ -73,6 +100,8 @@ function createBooking(payload) {
       time: payload.time,
       price: service.price,
       depositAmount,
+      serviceLocation,
+      homeAddress: serviceLocation === 'home' ? payload.homeAddress.trim() : '',
       status: 'pending_payment',
       paymentStatus: 'pending',
       notes: payload.notes || '',
@@ -85,10 +114,12 @@ function createBooking(payload) {
       appointmentId,
       amount: depositAmount,
       currency: data.settings.currency,
-      method: payload.paymentMethod || 'mobile_money',
-      provider: payload.paymentProvider || 'MTN Mobile Money',
+      method: 'mobile_money',
+      provider: 'Mobile Money screenshot',
       transactionReference: payload.transactionReference || id('txn'),
-      status: payload.paymentConfirmed ? 'confirmed' : 'pending',
+      screenshot,
+      verificationStatus: 'awaiting_review',
+      status: 'pending_verification',
       createdAt: now
     };
 
@@ -101,11 +132,6 @@ function createBooking(payload) {
       acceptedAt: now,
       ipAddress: payload.ipAddress || 'local'
     };
-
-    if (payment.status === 'confirmed') {
-      appointment.status = 'confirmed';
-      appointment.paymentStatus = 'paid_deposit';
-    }
 
     data.users.push(user);
     data.appointments.push(appointment);
@@ -132,6 +158,20 @@ function updateAppointment(appointmentId, payload) {
     if (payload.time) appointment.time = payload.time;
     if (payload.status) appointment.status = payload.status;
     if (payload.adminNote !== undefined) appointment.adminNote = payload.adminNote;
+
+    if (payload.status === 'confirmed') {
+      const payment = data.payments.find(item => item.appointmentId === appointment.id);
+      appointment.paymentStatus = 'paid_deposit';
+      if (payment) {
+        payment.status = 'confirmed';
+        payment.verificationStatus = 'verified';
+        payment.verifiedAt = new Date().toISOString();
+      }
+    }
+
+    if (payload.status === 'pending_payment') {
+      appointment.paymentStatus = 'pending';
+    }
 
     appointment.updatedAt = new Date().toISOString();
 
@@ -200,19 +240,23 @@ function saveService(payload) {
 
 function exportBookingsCsv() {
   const data = store.readData();
-  const header = ['Appointment ID', 'Customer', 'Phone', 'Email', 'Service', 'Date', 'Time', 'Price', 'Deposit', 'Status'];
+  const header = ['Appointment ID', 'Customer', 'Phone', 'Email', 'Service', 'Location', 'Home Address', 'Date', 'Time', 'Price', 'Deposit', 'Payment Proof', 'Status'];
   const rows = data.appointments.map(appointment => {
     const user = data.users.find(item => item.id === appointment.userId) || {};
+    const payment = data.payments.find(item => item.appointmentId === appointment.id) || {};
     return [
       appointment.id,
       user.fullName || '',
       user.phone || '',
       user.email || '',
       appointment.serviceName,
+      appointment.serviceLocation === 'home' ? 'Home service' : 'Visit spa',
+      appointment.homeAddress || '',
       appointment.date,
       appointment.time,
       appointment.price,
       appointment.depositAmount,
+      payment.screenshot?.name || '',
       appointment.status
     ];
   });

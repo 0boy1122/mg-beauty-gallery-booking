@@ -1,7 +1,7 @@
 {
-  "name": "mg-beauty-gallery-booking",
+  "name": "pure-touch-massage-booking",
   "version": "1.0.0",
-  "description": "Spa booking and appointment management system for MG Aesthetic and Spa.",
+  "description": "Spa booking and appointment management system for Pure Touch Massage.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

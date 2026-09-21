@@ -31,7 +31,7 @@ function readBody(req) {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-      if (body.length > 1_000_000) {
+      if (body.length > 4_000_000) {
         req.destroy();
         reject(new Error('Request body too large'));
       }
@@ -130,7 +130,7 @@ async function routeApi(req, res, url) {
       const csv = bookingController.exportBookingsCsv();
       res.writeHead(200, {
         'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': 'attachment; filename="mg-beauty-gallery-bookings.csv"'
+        'Content-Disposition': 'attachment; filename="pure-touch-massage-bookings.csv"'
       });
       return res.end(csv);
     }
@@ -165,5 +165,5 @@ const reminderTimer = setInterval(() => {
 reminderTimer.unref();
 
 server.listen(PORT, () => {
-  console.log(`MG Aesthetic and Spa booking app running at http://localhost:${PORT}`);
+  console.log(`Pure Touch Massage booking app running at http://localhost:${PORT}`);
 });

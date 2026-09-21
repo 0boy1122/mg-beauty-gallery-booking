@@ -40,7 +40,7 @@ function emailLayout(title, intro, rows, footer) {
   <html><body style="margin:0;background:#f6f3f1;font-family:Arial,sans-serif;color:#241f1c">
     <div style="max-width:620px;margin:0 auto;padding:28px 16px">
       <div style="background:#ffffff;border-top:5px solid #9b6b55;padding:28px">
-        <p style="margin:0 0 8px;color:#9b6b55;font-weight:700">MG Aesthetic and Spa</p>
+        <p style="margin:0 0 8px;color:#9b6b55;font-weight:700">Pure Touch Massage</p>
         <h1 style="margin:0 0 16px;font-size:26px">${escapeHtml(title)}</h1>
         <p style="margin:0 0 20px;line-height:1.6">${escapeHtml(intro)}</p>
         <table style="width:100%;border-collapse:collapse;background:#fbf9f8">${details}</table>
@@ -109,12 +109,15 @@ function bookingRows(details) {
   return [
     ['Customer', customer.fullName],
     ['Service', appointment.serviceName],
+    ['Appointment location', appointment.serviceLocation === 'home' ? 'Home service' : 'Pure Touch Massage, opposite FOCOS Hospital, Oyarifa'],
+    ...(appointment.serviceLocation === 'home' ? [['Home address', appointment.homeAddress]] : []),
     ['Date', appointment.date],
     ['Time', appointment.time],
     ['Phone', customer.phone],
     ['Email', customer.email],
     ['Service price', money(appointment.price, settings.currency)],
     ['Deposit', money(appointment.depositAmount, settings.currency)],
+    ['Payment proof', payment.screenshot?.name ? `Screenshot uploaded: ${payment.screenshot.name}` : 'Not uploaded'],
     ['Payment status', payment.status || appointment.paymentStatus]
   ];
 }
@@ -133,9 +136,9 @@ async function sendBookingCreated(appointmentId) {
       type: 'booking_request_customer',
       recipient: customer.email,
       subject: 'We received your booking request',
-      intro: `Hello ${customer.fullName}, your appointment request has been received and is awaiting confirmation.`,
+      intro: `Hello ${customer.fullName}, your appointment request and payment screenshot have been received and are awaiting verification.`,
       rows,
-      footer: `We will email you when the appointment is confirmed. ${settings.cancellationPolicy}`,
+      footer: `We will email you after admin verifies the 50% deposit screenshot. ${settings.cancellationPolicy}`,
       dedupeKey: `${appointmentId}:booking-request:customer`
     }),
     sendTrackedEmail({
@@ -215,7 +218,7 @@ async function processDueReminders(now = new Date()) {
       subject: 'Reminder: your spa appointment is coming up',
       intro: `Hello ${details.customer.fullName}, this is a reminder for your upcoming appointment.`,
       rows: bookingRows(details),
-      footer: 'Please arrive a few minutes early. Contact the spa if you need help with your appointment.',
+      footer: 'Please arrive a few minutes early. Contact Pure Touch Massage if you need help with your appointment.',
       dedupeKey: `${appointment.id}:reminder:${appointment.date}:${appointment.time}`
     }));
   }
